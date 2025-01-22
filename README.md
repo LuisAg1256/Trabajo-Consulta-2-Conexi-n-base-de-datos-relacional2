@@ -66,34 +66,34 @@ libraryDependencies ++= Seq(
 #### Código para conectarse a la base de datos
 
 ```scala
+
 import java.sql.{Connection, DriverManager}
 
-object ConexionMySQL {
-  def main(args: Array[String]): Unit = {
-    val url = "jdbc:mysql://localhost:3306/ejemplo_db"
-    val user = "root"
-    val password = "kame"
+object ejemploDb extends App{
+  val url = "jdbc:mysql://localhost:3306/ejemplo_db"
+  val user = "root"
+  val password = "kame"
 
-    try {
-      // Establecer conexión
-      val conexion: Connection = DriverManager.getConnection(url, user, password)
-      println("Conexión exitosa a la base de datos")
+  try {
+    // Establecer conexión
+    val conexion: Connection = DriverManager.getConnection(url, user, password)
+    println("Conexión exitosa a la base de datos")
 
-      // Consulta de prueba
-      val statement = conexion.createStatement()
-      val resultSet = statement.executeQuery("SELECT * FROM usuarios")
+    // Consulta de prueba
+    val statement = conexion.createStatement()
+    val resultSet = statement.executeQuery("SELECT * FROM usuarios")
 
-      println("Datos de la tabla:")
-      while (resultSet.next()) {
-        println(s"ID: ${resultSet.getInt("id")}, Nombre: ${resultSet.getString("nombre")}, Edad: ${resultSet.getInt("edad")}")
-      }
-
-      conexion.close()
-    } catch {
-      case e: Exception => e.printStackTrace()
+    println("Datos de la tabla:")
+    while (resultSet.next()) {
+      println(s"ID: ${resultSet.getInt("id")}, Nombre: ${resultSet.getString("nombre")}, Edad: ${resultSet.getInt("edad")}")
     }
+
+    conexion.close()
+  } catch {
+    case e: Exception => e.printStackTrace()
   }
 }
+
 ```
 
 #### Capturas de pantalla
